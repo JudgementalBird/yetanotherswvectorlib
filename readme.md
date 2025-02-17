@@ -13,7 +13,7 @@ local a = vecn()
 --(short for vec-from-cartesian)
 local b = vecc(15,39,-4)
 
---Creating a vector from spherical coords (Ie local, from a radar)
+--Creating a vector from spherical coords- (Ie local, from a radar)
 --should be done with vecs(dist,azim,elev). (short for vec-from-spherical)
 local dist, azim, elev = ign(1), ign(2), ign(3)
 local c = vecs(dist*pi2, azim*pi2, elev*pi2)

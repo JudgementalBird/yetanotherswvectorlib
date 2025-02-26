@@ -1,6 +1,6 @@
 This is primarily a method syntax based 3d vector library, which for now *should* work with, and later, will have trustworthy support for 2d.
 
-See lib_with_comments.lua for the library with explanatory comments, this is half of the defacto documentation.
+See lib_with_comments.lua for the library with explanatory comments — this serves as half of the de facto documentation.
 **See lib_concise.lua for what is intended to be slapped into stormworks.**
 
 I wrote a test for every single vector function to ensure they work as they should despite this lib being an infant, see tests.lua. That file also serves as documentation and examples.

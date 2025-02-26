@@ -1,5 +1,7 @@
 ---@diagnostic disable: lowercase-global, duplicate-set-field
 
+-- this one is NOT MINIFIABLE - rewriting super soon, but until then use the other file with 'minifiable' in its name
+
 function vecn()return _addvecfunctions{x=0,y=0,z=0} end
 function vecc(x,y,z)return _addvecfunctions{x=x, y=y, z=z or 0} end
 function vecs(dist,hor,ver)

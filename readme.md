@@ -1,4 +1,4 @@
-This is primarily a method syntax based 3d vector library, which for now *should* work with, and later, will have trustworthy support for 2d.
+This is primarily a method syntax based 3d cartesian vector library, which for now *should* work with, and later, will have trustworthy support for 2d cartesian as well.
 
 See lib_with_comments.lua for the library with explanatory comments — this serves as half of the de facto documentation.
 **See lib_concise.lua for what is intended to be slapped into stormworks.**

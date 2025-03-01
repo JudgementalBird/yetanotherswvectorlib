@@ -1,30 +1,8 @@
 ---@diagnostic disable: lowercase-global
 
----@class (exact) vec
----@field x number
----@field y number
----@field z number
----@field clone function
----@field display function
----@field add function
----@field muls function
----@field divs function
----@field dot function
----@field cross function
----@field proj function
----@field rej function
----@field refi function
----@field refo function
----@field abs function
----@field inv function
----@field sub function
----@field norm function
----@field tolocal function
----@field toglobal function
----@field gdelta function
-
 ---Create new empty vector.
----@return vec vec
+---@generic T
+---@return T vec
 ---@nodiscard
 ---@section vecn
 function vecn()return _addvecfunctions{x=0,y=0,z=0} end
@@ -34,7 +12,8 @@ function vecn()return _addvecfunctions{x=0,y=0,z=0} end
 ---@param x number
 ---@param y number
 ---@param z number|nil
----@return vec vec
+---@generic T
+---@return T vec
 ---@nodiscard
 ---@section vecc
 function vecc(x,y,z)return _addvecfunctions{x=x, y=y, z=z or 0} end
@@ -44,7 +23,8 @@ function vecc(x,y,z)return _addvecfunctions{x=x, y=y, z=z or 0} end
 ---@param dist number Distance
 ---@param hor number Horizontal angle in radians.
 ---@param ver number Vertical angle in radians.
----@return vec vec
+---@generic T
+---@return T vec
 ---@nodiscard
 ---@section vecs
 function vecs(dist,hor,ver)
@@ -56,8 +36,9 @@ function vecs(dist,hor,ver)
 ---@section _vecfuncs 1 _VECFUNCS
 _vecfuncs = {
   ---Makes a 1-layer deep-cloned vector.
-  ---@param self vec
-  ---@return vec result
+  ---@generic T
+  ---@param self T
+  ---@return T result
   ---@nodiscard
   ---@section clone
   clone = function(self)return vecc(self.x,self.y,self.z)end,
@@ -74,7 +55,8 @@ _vecfuncs = {
   ---Add `other` to `self`.
   ---@param self vec
   ---@param other vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section add
   add = function(self,other)return vecc(self.x+other.x, self.y+other.y, self.z+other.z) end,
@@ -83,7 +65,8 @@ _vecfuncs = {
   ---Multiply `self` by the scalar `s`.
   ---@param self vec
   ---@param s number
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section muls
   muls = function(self,s)return vecc(self.x*s, self.y*s, self.z*s) end,
@@ -92,7 +75,8 @@ _vecfuncs = {
   ---Divide `self` by the scalar `s`.
   ---@param self vec
   ---@param s number
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section divs
   divs = function(self,s)return vecc(self.x/s, self.y/s, self.z/s) end,
@@ -110,7 +94,8 @@ _vecfuncs = {
   ---Cross product of `self`x`other`. Source: https://en.wikipedia.org/wiki/Cross_product#Computing
   ---@param self vec
   ---@param other vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section cross
   cross = function(self,other)
@@ -120,7 +105,8 @@ _vecfuncs = {
   ---Vector projection of `self` onto `other`. Source: https://en.wikipedia.org/wiki/Vector_projection
   ---@param self vec
   ---@param other vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section proj
   proj = function(self,other)return other:muls(self:dot(other)/other:dot(other)) end,
@@ -129,7 +115,8 @@ _vecfuncs = {
   ---Vector rejection of `self` onto `other`. Source: https://en.wikipedia.org/wiki/Vector_projection
   ---@param self vec
   ---@param other vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section rej
   rej = function(self,other)return self:sub(self:proj(other)) end,
@@ -139,7 +126,8 @@ _vecfuncs = {
   ---Source: https://www.contemporarycalculus.com/dh/Calculus_all/CC11_7_VectorReflections.pdf
   ---@param self vec
   ---@param normal vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section refi
   refi = function(self,normal)return self:sub(self:proj(normal):muls(2)) end,
@@ -149,7 +137,8 @@ _vecfuncs = {
   ---Source: https://www.fabrizioduroni.it/blog/post/2017/08/25/how-to-calculate-reflection-vector
   ---@param self vec
   ---@param normal vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section refo
   refo = function(self,normal)return normal:muls(self:dot(normal)):muls(2):sub(self) end,
@@ -165,7 +154,8 @@ _vecfuncs = {
 
   ---Gives `self`'s opposite vector
   ---@param self vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section inv
   inv = function(self)return self:muls(-1) end,
@@ -174,7 +164,8 @@ _vecfuncs = {
   ---Subtraction. `self`-`other`, or `self` + -1*`other`.
   ---@param self vec
   ---@param other vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section sub
   sub = function(self,other)return self:add( other:inv() ) end,
@@ -182,7 +173,8 @@ _vecfuncs = {
 
   ---Normalizes `self`. `normalized` has a magnitude of 1.
   ---@param self vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section norm
   norm = function(self)return self:divs( self:abs() ) end,
@@ -194,7 +186,8 @@ _vecfuncs = {
   ---@param r vec
   ---@param f vec
   ---@param u vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section tolocal
   tolocal = function(self,r,f,u)return vecc(self:dot(r),self:dot(f),self:dot(u)) end,
@@ -206,7 +199,8 @@ _vecfuncs = {
   ---@param r vec
   ---@param f vec
   ---@param u vec
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section toglobal
   toglobal = function(self,r,f,u)return r:muls(self.x):add(f:muls(self.y)):add(u:muls(self.z)) end,
@@ -216,7 +210,8 @@ _vecfuncs = {
   ---Warning: To facilitate this, it uses global variables.
   ---@param self vec
   ---@param index number
-  ---@return vec result
+  ---@generic T
+---@return T result
   ---@nodiscard
   ---@section gdelta
   gdelta = function(self,index)

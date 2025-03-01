@@ -1,6 +1,6 @@
 ---@diagnostic disable: lowercase-global
 
-local to_test = {"lib_concise", "lib_with_comments"}
+local to_test = {"lib_concise", "lib"}
 for i = 1,2 do
 	require(to_test[i])
 	print("\n".."-- TESTING: "..to_test[i].." --")
